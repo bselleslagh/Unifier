@@ -1,3 +1,8 @@
 ipykernel
 pandas
-dedupe
+fuzzywuzzy
+python-Levenshtein
+pyarrow
+fastparquet
+faker
+tqdm
