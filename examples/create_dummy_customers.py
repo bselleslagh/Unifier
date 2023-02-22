@@ -12,6 +12,8 @@ from dataclasses import dataclass
 # Define the customer class
 @dataclass
 class Customer:
+    id: str
+    source: str
     firstname: str
     lastname: str
     street: str
@@ -27,6 +29,8 @@ class Customer:
 async def create_customer_async(streetnames, fake):
     record = streetnames.sample(1).to_dict('records')[0]
     customer = Customer(
+        id = fake.uuid4(),
+        source = ['facebook', 'instagram', 'twitter', 'linkedin'][fake.random_int(min=0, max=3)],
         firstname=fake.first_name(),
         lastname=fake.last_name(),
         street=record['streetname_nl'],
@@ -69,4 +73,4 @@ async def main_async(locale='nl_BE', amount=10000, max_concurrency=10):
     df.to_parquet('../data/customers.parquet')
 
 if __name__ == '__main__':
-    asyncio.run(main_async())
+    asyncio.run(main_async(amount=3))
